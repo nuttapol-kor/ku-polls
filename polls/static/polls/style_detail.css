@@ -1,15 +1,9 @@
-li a {
-    color: green;
-}
-
 body {
-    background: url("images/background.gif") no-repeat center fixed;
-    background-size: cover;
-    color: #9b9b9b;
+    background-color: #f8b195;
     text-transform: capitalize;
 }
 
-.vote_button{
+input[type=submit] {
     display:inline-block;
     padding:0.35em 1.2em;
     border:0.1em solid #FFFFFF;
@@ -23,12 +17,12 @@ body {
     background-color: transparent;
 }
 
-.vote_button:hover{
+input[type=submit]:hover{
     color:#000000;
     background-color:#FFFFFF;
 }
 
-.result_button{
+.index_button{
     display:inline-block;
     padding:0.35em 1.2em;
     border:0.1em solid #FFFFFF;
@@ -42,13 +36,7 @@ body {
     background-color: transparent;
 }
 
-.result_button:hover{
+.index_button:hover{
     color:#000000;
     background-color:#FFFFFF;
-}
-
-a {
-    padding: 10px;
-    padding-bottom: 10px;
-    text-decoration: none;
 }
