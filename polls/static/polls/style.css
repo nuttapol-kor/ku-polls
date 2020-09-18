@@ -3,5 +3,52 @@ li a {
 }
 
 body {
-    background: white url("images/background.gif") no-repeat;
+    background: url("images/background.gif") no-repeat center fixed;
+    background-size: cover;
+    color: #dadada;
+    text-transform: capitalize;
+}
+
+.vote_button{
+    display:inline-block;
+    padding:0.35em 1.2em;
+    border:0.1em solid #FFFFFF;
+    border-radius:0.12em;
+    text-decoration:none;
+    font-family:'Roboto',sans-serif;
+    font-weight:300;
+    color:#FFFFFF;
+    text-align:center;
+    transition: all 0.2s;
+    background-color: transparent;
+}
+
+.vote_button:hover{
+    color:#000000;
+    background-color:#FFFFFF;
+}
+
+.result_button{
+    display:inline-block;
+    padding:0.35em 1.2em;
+    border:0.1em solid #FFFFFF;
+    border-radius:0.12em;
+    text-decoration:none;
+    font-family:'Roboto',sans-serif;
+    font-weight:300;
+    color:#FFFFFF;
+    text-align:center;
+    transition: all 0.2s;
+    background-color: transparent;
+}
+
+.result_button:hover{
+    color:#000000;
+    background-color:#FFFFFF;
+}
+
+a {
+    padding: 10px;
+    padding-bottom: 10px;
+    text-decoration: none;
 }

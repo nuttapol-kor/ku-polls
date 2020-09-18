@@ -93,3 +93,7 @@ a:active {
     color:#000000;
     background-color:#FFFFFF;
 }
+
+li.messages{
+    color: red;
+}
