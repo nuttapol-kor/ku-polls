@@ -1,10 +1,33 @@
-<h1>{{ question.question_text }}</h1>
+{% load static %}
+<h2>{{ question.question_text }}</h2>
+<link rel="stylesheet" href="{% static 'polls/style_results.css' %}">
 
-<ul>
-{% for choice in question.choice_set.all %}
-    <br> <a>{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</a> <br>
-{% endfor %}
-</ul>
+<div class="table-wrapper">
+    <table class="fl-table">
+    <thead>
+    <tr class="w3-red">
+        <th>Choice</th>
+        <th>Vote</th>
+    </tr>
+    </thead>
+    <tbody>
+<!-- <ul> -->
+        {% for choice in question.choice_set.all %}
+        <tr>
+    <!-- <br> <a>{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</a> <br> -->
+            <td> {{choice.choice_text}} </td>
+            <td> {{choice.votes}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    <!-- <tr>
+        {% for choice in question.choice_set.all %}
+            <td> {{ choice.votes }} </td>
+        {% endfor %}
+    </tr> -->
+<!-- </ul> -->
+</table>
+</div>
 
 <a href="{% url 'polls:detail' question.id %}">Vote again?</a>
 <a href="{% url 'polls:index' %}"> <button class="index_button">back</button></a>
