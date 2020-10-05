@@ -3,6 +3,7 @@
 Web application for conducting online polls and surveys.
 
 [![Build Status](https://travis-ci.com/nuttapol-kor/ku-polls.svg?branch=master)](https://travis-ci.com/nuttapol-kor/ku-polls)
+[![codecov](https://codecov.io/gh/nuttapol-kor/ku-polls/branch/master/graph/badge.svg?token=D5AJ1F6GCP)](undefined)
 
 ## Project Documents
 
