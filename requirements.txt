@@ -1,0 +1,4 @@
+coverage
+django
+environ
+django-environ
