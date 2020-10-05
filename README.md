@@ -2,6 +2,8 @@
 
 Web application for conducting online polls and surveys.
 
+[![Build Status](https://travis-ci.com/nuttapol-kor/ku-polls.svg?branch=master)](https://travis-ci.com/nuttapol-kor/ku-polls)
+
 ## Project Documents
 
 [Vision of KU](../../wiki/Vision%20Statement)
