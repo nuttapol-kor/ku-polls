@@ -1,5 +1,7 @@
+"""Views for main web."""
 from django.shortcuts import redirect
 
+
 def index(request):
-    """ Redirect to the polls index"""
+    """Redirect to the polls index."""
     return redirect("polls:index")
