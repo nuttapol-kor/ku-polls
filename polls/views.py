@@ -7,7 +7,7 @@ from django.utils import timezone
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
-from .models import Choice, Question
+from .models import Choice, Question, Vote
 
 
 class IndexView(generic.ListView):
@@ -52,8 +52,15 @@ def vote(request, question_id):
             'error_message': "You didn't select a choice.",
         })
     else:
-        selected_choice.votes += 1
-        selected_choice.save()
+        vote, created = Vote.objects.update_or_create(question=question, user=request.user, defaults={"user_choice": selected_choice})
+        if created:
+            messages.success(request, "Successfully voted!!")
+        else:
+            messages.success(request, "Replaces your previous vote successful!!")
+        for choice in question.choice_set.all():
+            choice.votes = Vote.objects.filter(question=question).filter(user_choice=choice).count()
+            choice.save()
+        
         # Always return an HttpResponseRedirect after successfully dealing
         # with POST data. This prevents data from being posted twice if a
         # user hits the Back button.
