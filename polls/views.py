@@ -66,11 +66,23 @@ def vote(request, question_id):
         # user hits the Back button.
         return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
 
-
+@login_required
 def vote_for_poll(request, pk):
     """Show the detail only valid question."""
+    previous_selected_vote_text = ""
+    has_previous_vote = False
     question = get_object_or_404(Question, pk=pk)
+    previous_selected_vote = Vote.objects.filter(question=question).filter(user=request.user).first()
+    if previous_selected_vote is None:
+        previous_selected_vote_text = ""
+    else:
+        previous_selected_vote_text = previous_selected_vote.user_choice.choice_text
+        has_previous_vote = True
+    # if a is None:
+    #     a = "None"
     if not question.can_vote():
         messages.error(request, "This Question can not vote")
         return redirect('polls:index')
-    return render(request, 'polls/detail.html', {'question': question})
+    return render(request, 'polls/detail.html', 
+            {'question': question, 'previous_selected_vote_text': previous_selected_vote_text, 
+            'has_previous_vote': has_previous_vote})

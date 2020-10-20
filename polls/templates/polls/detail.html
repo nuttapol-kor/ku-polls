@@ -2,6 +2,10 @@
 <link rel="stylesheet" href="{% static 'polls/style_detail.css' %}">
 
 <h1>{{ question.question_text }}</h1>
+{% if has_previous_vote %}
+<h3> You previous vote is : {{ previous_selected_vote_text }} </h3>
+{% endif %}
+
 
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
@@ -11,6 +15,7 @@
     <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
     <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
 {% endfor %}
+
 <input type="submit" value="Vote">
 </form>
 <a href="{% url 'polls:index' %}"> <button class="index_button">back</button></a>
