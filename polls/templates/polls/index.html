@@ -10,6 +10,14 @@
 </ul>
 {% endif %}
 
+{% if user.is_authenticated %}
+  <h2> Welcome to KU POLLS, {{ user.first_name }}</h2>
+  <a href="{% url 'logout'%}">Logout?</a>
+{% else %}
+  <h2> Welcome to KU POLLS, Anonymous User</h2>
+  You can view only the result <a href="{% url 'login' %}">Need To Login?</a>
+{% endif %}
+
 {% if latest_question_list %}
     <ul>
     {% for question in latest_question_list %}
