@@ -1,4 +1,7 @@
 """Takes a Web request and returns a Web response."""
+import logging
+import logging.config
+
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse
@@ -6,8 +9,33 @@ from django.views import generic
 from django.utils import timezone
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-
+from django.contrib.auth.signals import user_logged_in, user_logged_out, user_login_failed 
+from django.dispatch import receiver
 from .models import Choice, Question, Vote
+from .settings import LOGGING
+
+logging.config.dictConfig(LOGGING)
+logger = logging.getLogger("polls")
+
+def get_client_ip(request):
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+    return ip
+
+@receiver(user_logged_in)
+def logged_in_logging(sender, request, user, **kwargs):
+    logger.info(f"{user.username} {get_client_ip(request)} has logged in")
+
+@receiver(user_logged_out)
+def logged_out_logging(sender, request, user, **kwargs):
+    logger.info(f"{user.username} {get_client_ip(request)} has logged out")
+
+@receiver(user_login_failed)
+def logged_in_failed_logging(sender, request, credentials, **kwargs):
+    logger.warning(f"{request.POST['username']} {get_client_ip(request)} login failed")
 
 
 class IndexView(generic.ListView):
@@ -60,7 +88,8 @@ def vote(request, question_id):
         for choice in question.choice_set.all():
             choice.votes = Vote.objects.filter(question=question).filter(user_choice=choice).count()
             choice.save()
-        
+        logger.info(f"{request.user.username} {get_client_ip(request)} voting on {question.question_text} in {selected_choice} success!!")
+
         # Always return an HttpResponseRedirect after successfully dealing
         # with POST data. This prevents data from being posted twice if a
         # user hits the Back button.
