@@ -16,7 +16,7 @@
         <tr>
     <!-- <br> <a>{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</a> <br> -->
             <td> {{choice.choice_text}} </td>
-            <td> {{choice.votes}}</td>
+            <td> {{choice.vote_set.all.count}}</td>
         </tr>
         {% endfor %}
     </tbody>

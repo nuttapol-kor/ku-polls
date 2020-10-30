@@ -85,9 +85,6 @@ def vote(request, question_id):
             messages.success(request, "Successfully voted!!")
         else:
             messages.success(request, "Replaces your previous vote successful!!")
-        for choice in question.choice_set.all():
-            choice.votes = Vote.objects.filter(question=question).filter(user_choice=choice).count()
-            choice.save()
         logger.info(f"{request.user.username} {get_client_ip(request)} voting on {question.question_text} in {selected_choice} success!!")
 
         # Always return an HttpResponseRedirect after successfully dealing

@@ -30,8 +30,8 @@ class VotingTests(TestCase):
         #create user2
         User.objects.create_user(username="User2",email='User2@gmail.com',password='isp123456')
         self.question1 = create_question(question_text='Question1', days=-1)
-        self.choice1 = self.question1.choice_set.create(choice_text='Choice1', votes=0)
-        self.choice2 = self.question1.choice_set.create(choice_text='Choice2', votes=0)
+        self.choice1 = self.question1.choice_set.create(choice_text='Choice1')
+        self.choice2 = self.question1.choice_set.create(choice_text='Choice2')
         self.question1_url = reverse('polls:vote', args=(self.question1.id,))
 
     def test_response_code_authentication_user_vote(self):

@@ -47,7 +47,6 @@ class Choice(models.Model):
 
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     choice_text = models.CharField(max_length=200)
-    votes = models.IntegerField(default=0)
 
     def __str__(self):
         """Representations the Choice object."""
@@ -58,6 +57,3 @@ class Vote(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     user_choice = models.ForeignKey(Choice, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-
-    class Meta:
-        unique_together = (('user', 'question'),)
